@@ -1,7 +1,6 @@
 import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import StarRateIcon from "@mui/icons-material/StarRate";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -35,13 +34,6 @@ export default function MovieCard(props) {
     <Card sx={styles.card}>
       <CardHeader
         sx={styles.header}
-        avatar={
-          movie.favourite ? (
-            <Avatar sx={styles.avatar}>
-              <FavoriteIcon />
-            </Avatar>
-          ) : null
-        }
         title={
           <Typography
             variant="h5"
@@ -85,7 +77,11 @@ export default function MovieCard(props) {
           aria-label="add to favourites"
           onClick={handleAddToFavourite}
         >
-          <FavoriteIcon color="primary" fontSize="large" />
+          {movie.favourite ? (
+            <FavoriteIcon color="error" fontSize="large" />
+          ) : (
+            <FavoriteIcon color="primary" fontSize="large" />
+          )}
         </IconButton>
         <Link to={`/movies/${movie.id}`}>
           <Button variant="outlined" size="medium" color="primary">

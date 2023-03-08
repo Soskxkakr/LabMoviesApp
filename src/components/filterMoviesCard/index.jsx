@@ -58,11 +58,15 @@ const FilterMoviesCard = (props) => {
   return (
     <>
       <Card sx={styles.root} variant="outlined">
-        <CardContent>
-          <Typography variant="h5" component="h1">
-            <FilterAltIcon fontSize="large" />
-            Filter the movies.
-          </Typography>
+        <CardContent
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <FilterAltIcon fontSize="medium" />
+          <Typography variant="h5">FILTER</Typography>
         </CardContent>
       </Card>
 
@@ -123,11 +127,15 @@ const FilterMoviesCard = (props) => {
         </TextField>
       </FormControl>
       <Card sx={styles.root} variant="outlined">
-        <CardContent>
-          <Typography variant="h5" component="h1">
-            <SortIcon fontSize="large" />
-            Sort the movies.
-          </Typography>
+        <CardContent
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <SortIcon fontSize="medium" />
+          <Typography variant="h5">SORT</Typography>
         </CardContent>
       </Card>
     </>
