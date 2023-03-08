@@ -27,24 +27,13 @@ const MovieListPage = (props) => {
 
   const genreId = Number(genreFilter);
 
-  //let displayedMovies = movies
-    //.filter((m) => {
-      //return m.title.toLowerCase().search(titleFilter.toLowerCase()) !== -1;
-    //})
-    //.filter((m) => {
-      //return genreId > 0 ? m.genre_ids.includes(genreId) : true;
-    //});
-
-    let displayedMovies = [];
-
-if (Array.isArray(movies)) {
-  displayedMovies = movies
+  let displayedMovies = movies
     .filter((m) => {
       return m.title.toLowerCase().search(titleFilter.toLowerCase()) !== -1;
+    })
+    .filter((m) => {
+      return genreId > 0 ? m.genre_ids.includes(genreId) : true;
     });
-} else {
-  console.log("movies is not an array"); // or display an error message
-}
 
   const handleChange = (type, value) => {
     if (type === "title") setTitleFilter(value);
@@ -81,7 +70,7 @@ if (Array.isArray(movies)) {
           <Header title={"Home Page"} />
         </Grid>
         <Grid item container spacing={5}>
-          <MovieList movies={displayedMovies}></MovieList>
+        <MovieList movies={displayedMovies} selectFavourite={addToFavourites} />
         </Grid>
       </Grid>
       <Fab
