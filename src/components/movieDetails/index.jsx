@@ -1,31 +1,13 @@
-import React from "react";
-import Chip from "@mui/material/Chip";
-import Paper from "@mui/material/Paper";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import MonetizationIcon from "@mui/icons-material/MonetizationOn";
 import StarRate from "@mui/icons-material/StarRate";
+import Chip from "@mui/material/Chip";
+import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-
-const styles = {
-    root: {   
-      chipSet: {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexWrap: "wrap",
-        listStyle: "none",
-        padding: 1.5,
-        margin: 0,
-      },
-      chipLabel: {
-        margin: 0.5,
-      },
-    },
-  };
-  
+import { Styles } from "./style";
 
 const MovieDetails = (props) => {
-  const movie = props.movie
+  const movie = props.movie;
 
   return (
     <>
@@ -37,18 +19,18 @@ const MovieDetails = (props) => {
         {movie.overview}
       </Typography>
 
-      <Paper component="ul" sx={styles.chipSet}>
+      <Paper component="ul" sx={Styles.chipSet}>
         <li>
-          <Chip label="Genres" sx={styles.chipLabel} color="primary" />
+          <Chip label="Genres" sx={Styles.chipLabel} color="primary" />
         </li>
         {movie.genres.map((g) => (
           <li key={g.name}>
-            <Chip label={g.name}  />
+            <Chip label={g.name} />
           </li>
         ))}
       </Paper>
 
-      <Paper component="ul" sx={styles.chipSet}>
+      <Paper component="ul" sx={Styles.chipSet}>
         <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
         <Chip
           icon={<MonetizationIcon />}
@@ -60,10 +42,14 @@ const MovieDetails = (props) => {
         />
         <Chip label={`Released: ${movie.release_date}`} />
       </Paper>
-      
-      <Paper component="ul" sx={styles.chipSet}>
+
+      <Paper component="ul" sx={Styles.chipSet}>
         <li>
-          <Chip label="Production Countries" sx={styles.chipLabel} color="primary" />
+          <Chip
+            label="Production Countries"
+            sx={Styles.chipLabel}
+            color="primary"
+          />
         </li>
         {movie.production_countries.map((country) => (
           <li key={country.name}>
@@ -71,7 +57,8 @@ const MovieDetails = (props) => {
           </li>
         ))}
       </Paper>
-      </>
+    </>
   );
 };
-export default  MovieDetails ;
+
+export default MovieDetails;

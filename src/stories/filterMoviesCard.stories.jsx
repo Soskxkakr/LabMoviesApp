@@ -1,5 +1,5 @@
 import React from "react";
-import FilterMoviesCard from "../components/filterMoviesCard";
+import { FilterMoviesCard } from "../components";
 
 export default {
   title: "Home Page/FilterMoviesCard",
@@ -9,4 +9,5 @@ export default {
 export const Basic = () => {
   return <FilterMoviesCard />;
 };
+
 Basic.storyName = "Default";

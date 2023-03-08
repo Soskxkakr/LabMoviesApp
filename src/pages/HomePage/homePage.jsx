@@ -1,21 +1,17 @@
-import React, { useState, useEffect } from "react";
-import Header from "../components/headerMovieList";
-import FilterCard from "../components/filterMoviesCard";
-import MovieList from "../components/movieList";
-import Grid from "@mui/material/Grid";
-import Fab from "@mui/material/Fab";
 import Drawer from "@mui/material/Drawer";
-
+import Fab from "@mui/material/Fab";
+import Grid from "@mui/material/Grid";
+import React, { useEffect, useState } from "react";
+import { FilterMoviesCard, Header, MovieList } from "../../components";
 
 const styles = {
   root: {
     padding: "20px",
   },
   fab: {
-    marginTop: 8,
     position: "fixed",
-    top: 2,
-    right: 2,
+    top: 12,
+    right: 12,
   },
 };
 
@@ -42,15 +38,24 @@ const MovieListPage = (props) => {
 
   // New function
   const addToFavourites = (movieId) => {
-    const updatedMovies = movies.map((m) =>
-      m.id === movieId ? { ...m, favourite: true } : m
-    );
+    const updatedMovies = movies.map((movie) => {
+      if (movie.id === movieId) {
+        if (!!movie.favourite && movie.favourite) {
+          return { ...movie, favourite: false };
+        }
+        return { ...movie, favourite: true };
+      } else {
+        return movie;
+      }
+    });
     setMovies(updatedMovies);
   };
 
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&include_adult=false&page=1`
+      `https://api.themoviedb.org/3/discover/movie?api_key=${
+        import.meta.env.VITE_TMDB_KEY
+      }&language=en-US&include_adult=false&page=1`
     )
       .then((res) => res.json())
       .then((json) => {
@@ -67,26 +72,29 @@ const MovieListPage = (props) => {
     <>
       <Grid container sx={styles.root}>
         <Grid item xs={12}>
-          <Header title={"Home Page"} />
+          <Header title={"Movies"} />
         </Grid>
         <Grid item container spacing={5}>
-        <MovieList movies={displayedMovies} selectFavourite={addToFavourites} />
+          <MovieList
+            movies={displayedMovies}
+            selectFavourite={addToFavourites}
+          />
         </Grid>
       </Grid>
       <Fab
-          color="secondary"
-          variant="extended"
-          onClick={() => setDrawerOpen(true)}
-          sx={styles.fab}
-        >
-          Filter
+        color="secondary"
+        variant="extended"
+        onClick={() => setDrawerOpen(true)}
+        sx={styles.fab}
+      >
+        Filter
       </Fab>
       <Drawer
         anchor="left"
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
       >
-        <FilterCard
+        <FilterMoviesCard
           onUserInput={handleChange}
           titleFilter={titleFilter}
           genreFilter={genreFilter}
@@ -95,4 +103,4 @@ const MovieListPage = (props) => {
     </>
   );
 };
-export default MovieListPage;
+export { MovieListPage };
