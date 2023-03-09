@@ -9,6 +9,7 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useMovie } from "../../contexts/MovieContext";
 
 const styles = {
   root: {
@@ -25,6 +26,8 @@ const styles = {
 
 const FilterMoviesCard = (props) => {
   const [genres, setGenres] = useState([{ id: "0", name: "All" }]);
+  const [title, setTitle] = useState("");
+  const { filterMovies } = useMovie();
 
   useEffect(() => {
     fetch(
@@ -103,9 +106,12 @@ const FilterMoviesCard = (props) => {
         id="filled-search"
         label="Search field"
         type="search"
-        value={props.titleFilter}
+        value={title}
         variant="filled"
-        onChange={handleTextChange}
+        onChange={(e) => {
+          setTitle(e.target.value);
+          filterMovies(e.target.value);
+        }}
       />
 
       <FormControl sx={styles.formControl}>

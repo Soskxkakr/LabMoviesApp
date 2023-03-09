@@ -1,5 +1,5 @@
 import { FilterMoviesCard } from "./filterMoviesCard";
 import { Header } from "./headerMovieList";
-import { MovieList } from "./movieList";
+import { MovieCard } from "./movieCard";
 
-export { FilterMoviesCard, Header, MovieList };
+export { FilterMoviesCard, Header, MovieCard };

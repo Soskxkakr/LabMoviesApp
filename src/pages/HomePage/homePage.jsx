@@ -1,8 +1,10 @@
+import { Container } from "@mui/material";
 import Drawer from "@mui/material/Drawer";
 import Fab from "@mui/material/Fab";
 import Grid from "@mui/material/Grid";
-import React, { useEffect, useState } from "react";
-import { FilterMoviesCard, Header, MovieList } from "../../components";
+import React, { useState } from "react";
+import { FilterMoviesCard, Header, MovieCard } from "../../components";
+import { useMovie } from "../../contexts/MovieContext";
 
 const styles = {
   root: {
@@ -16,70 +18,39 @@ const styles = {
 };
 
 const MovieListPage = (props) => {
-  const [movies, setMovies] = useState([]);
-  const [titleFilter, setTitleFilter] = useState("");
-  const [genreFilter, setGenreFilter] = useState("0");
+  // const [genreFilter, setGenreFilter] = useState("0");
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const { movies, addToFavourites } = useMovie();
 
-  const genreId = Number(genreFilter);
-
-  let displayedMovies = movies
-    .filter((m) => {
-      return m.title.toLowerCase().search(titleFilter.toLowerCase()) !== -1;
-    })
-    .filter((m) => {
-      return genreId > 0 ? m.genre_ids.includes(genreId) : true;
-    });
+  // const genreId = Number(genreFilter);
 
   const handleChange = (type, value) => {
     if (type === "title") setTitleFilter(value);
-    else setGenreFilter(value);
+    // else setGenreFilter(value);
   };
-
-  // New function
-  const addToFavourites = (movieId) => {
-    const updatedMovies = movies.map((movie) => {
-      if (movie.id === movieId) {
-        if (!!movie.favourite && movie.favourite) {
-          return { ...movie, favourite: false };
-        }
-        return { ...movie, favourite: true };
-      } else {
-        return movie;
-      }
-    });
-    setMovies(updatedMovies);
-  };
-
-  useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${
-        import.meta.env.VITE_TMDB_KEY
-      }&language=en-US&include_adult=false&page=1`
-    )
-      .then((res) => res.json())
-      .then((json) => {
-        // console.log(json);
-        return json.results;
-      })
-      .then((movies) => {
-        setMovies(movies);
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <>
+      <Container item xs={12}>
+        <Header title={"Movies"} />
+      </Container>
       <Grid container sx={styles.root}>
-        <Grid item xs={12}>
-          <Header title={"Movies"} />
-        </Grid>
-        <Grid item container spacing={5}>
-          <MovieList
-            movies={displayedMovies}
-            selectFavourite={addToFavourites}
-          />
-        </Grid>
+        {movies.map((movie) => {
+          return (
+            <Grid
+              key={movie.id}
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              lg={3}
+              xl={2}
+              sx={{ justifyContent: "center", marginX: 3 }}
+            >
+              <MovieCard movie={movie} />
+            </Grid>
+          );
+        })}
       </Grid>
       <Fab
         color="secondary"
@@ -96,8 +67,7 @@ const MovieListPage = (props) => {
       >
         <FilterMoviesCard
           onUserInput={handleChange}
-          titleFilter={titleFilter}
-          genreFilter={genreFilter}
+          // genreFilter={genreFilter}
         />
       </Drawer>
     </>

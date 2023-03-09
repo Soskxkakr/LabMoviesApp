@@ -12,6 +12,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import React from "react";
 import { Link } from "react-router-dom";
+import { useMovie } from "../../contexts/MovieContext";
 import img from "../../images/film-poster-placeholder.png";
 
 const styles = {
@@ -22,13 +23,8 @@ const styles = {
   },
 };
 
-export default function MovieCard(props) {
-  const movie = props.movie;
-
-  const handleAddToFavourite = (e) => {
-    e.preventDefault();
-    props.selectFavourite(movie.id);
-  };
+const MovieCard = ({ movie }) => {
+  const { addToFavourites } = useMovie();
 
   return (
     <Card sx={styles.card}>
@@ -75,7 +71,7 @@ export default function MovieCard(props) {
       <CardActions disableSpacing>
         <IconButton
           aria-label="add to favourites"
-          onClick={handleAddToFavourite}
+          onClick={() => addToFavourites(movie)}
         >
           {movie.favourite ? (
             <FavoriteIcon color="error" fontSize="large" />
@@ -91,4 +87,6 @@ export default function MovieCard(props) {
       </CardActions>
     </Card>
   );
-}
+};
+
+export { MovieCard };
