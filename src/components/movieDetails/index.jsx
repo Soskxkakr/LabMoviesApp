@@ -4,10 +4,33 @@ import StarRate from "@mui/icons-material/StarRate";
 import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import { Styles } from "./style";
+import NavigationIcon from "@mui/icons-material/Navigation";
+import Fab from "@mui/material/Fab";
+import Drawer from "@mui/material/Drawer";
+import MovieReviews from "../movieReviews";
 
-const MovieDetails = (props) => {
-  const movie = props.movie;
+const styles = {
+  chipSet: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexWrap: "wrap",
+    listStyle: "none",
+    padding: 1.5,
+    margin: 0,
+  },
+  chipLabel: {
+    margin: 0.5,
+  },
+  fab: {
+    position: "fixed",
+    top: 50,
+    right: 2,
+  },
+};
+
+const MovieDetails = ({ movie }) => {
+  const [drawerOpen, setDrawerOpen] = useState(false); // New
 
   return (
     <>
@@ -29,8 +52,7 @@ const MovieDetails = (props) => {
           </li>
         ))}
       </Paper>
-
-      <Paper component="ul" sx={Styles.chipSet}>
+      <Paper component="ul" sx={styles.chipSet}>
         <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
         <Chip
           icon={<MonetizationIcon />}
@@ -42,21 +64,22 @@ const MovieDetails = (props) => {
         />
         <Chip label={`Released: ${movie.release_date}`} />
       </Paper>
-
-      <Paper component="ul" sx={Styles.chipSet}>
-        <li>
-          <Chip
-            label="Production Countries"
-            sx={Styles.chipLabel}
-            color="primary"
-          />
-        </li>
-        {movie.production_countries.map((country) => (
-          <li key={country.name}>
-            <Chip label={country.name} />
-          </li>
-        ))}
-      </Paper>
+      <Fab
+        color="secondary"
+        variant="extended"
+        onClick={() => setDrawerOpen(true)}
+        sx={styles.fab}
+      >
+        <NavigationIcon />
+        Reviews
+      </Fab>
+      <Drawer
+        anchor="top"
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+      >
+        <MovieReviews movie={movie} />
+      </Drawer>
     </>
   );
 };
