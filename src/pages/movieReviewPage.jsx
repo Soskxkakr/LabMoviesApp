@@ -1,15 +1,17 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import PageTemplate from "../components/templateMoviePage";
 import MovieReview from "../components/movieReview";
+import { TemplateMoviePage } from "../components/templateMoviePage";
 
 const MovieReviewPage = (props) => {
-  const { state : {movie, review } } = useLocation()
+  const {
+    state: { movie, review },
+  } = useLocation();
   return (
-    <PageTemplate movie={movie}>
+    <TemplateMoviePage movie={movie}>
       <MovieReview review={review} />
-    </PageTemplate>
+    </TemplateMoviePage>
   );
 };
 
-export default MovieReviewPage;
+export { MovieReviewPage };

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import MovieHeader from "../headerMovie";
 import Grid from "@mui/material/Grid";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
+import React, { useEffect, useState } from "react";
 import { getMovieImages } from "../../api/tmdb-api";
+import MovieHeader from "../headerMovie";
 
 const styles = {
   gridListRoot: {
@@ -13,7 +13,7 @@ const styles = {
   },
   gridList: {
     width: 450,
-    height: '100vh',
+    height: "100vh",
   },
 };
 
@@ -59,4 +59,4 @@ const TemplateMoviePage = ({ movie, children }) => {
   );
 };
 
-export default TemplateMoviePage;
+export { TemplateMoviePage };
