@@ -1,12 +1,12 @@
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import MonetizationIcon from "@mui/icons-material/MonetizationOn";
+import NavigationIcon from "@mui/icons-material/Navigation";
 import StarRate from "@mui/icons-material/StarRate";
 import Chip from "@mui/material/Chip";
+import Drawer from "@mui/material/Drawer";
+import Fab from "@mui/material/Fab";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import NavigationIcon from "@mui/icons-material/Navigation";
-import Fab from "@mui/material/Fab";
-import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews";
 
 const styles = {
@@ -85,3 +85,27 @@ const MovieDetails = ({ movie }) => {
 };
 
 export default MovieDetails;
+
+// 1st WAY
+export const myFunction = () => {}
+export const myFunction2 = () => {}
+export const myFunction3 = () => {}
+
+import { default as myFunction, default as myFunction2, default as myFunction3 } from 'here';
+
+//2nd Way
+const myFunction = () => {
+
+}
+
+export default myFunction;
+
+
+//3rd Way
+const myFunction = () => {}
+const myFunction2 = () => {}
+const myFunction3 = () => {}
+
+export { myFunction, myFunction2, myFunction3 };
+
+
