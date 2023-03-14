@@ -5,6 +5,7 @@ const MovieContext = createContext({});
 
 export const MovieProvider = ({ children }) => {
   const [movies, setMovies] = useState([]);
+  const [movieImages, setMovieImages] = useState([]);
   const [allMovies, setAllMovies] = useState([]);
   const [favouriteMovies, setFavouriteMovies] = useState([]);
 
@@ -12,18 +13,40 @@ export const MovieProvider = ({ children }) => {
     getMovies();
   }, []);
 
+  const getMovie = async (id) => {
+    await client
+      .get(`/movie/${id}`)
+      .then((res) => {
+        if (!!res && !!res.data) return res.data;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   const getMovies = async () => {
     await client
-      .get("/discover/movie", {
-        params: {
-          api_key: import.meta.env.VITE_TMDB_KEY,
-        },
-      })
+      .get("/discover/movie")
       .then((res) => {
         if (!!res && !!res.data) {
           setAllMovies(res.data.results);
           setMovies(res.data.results);
         }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const getMovieImages = async (id) => {
+    await client
+      .get(`/movie/${id}/images`, {
+        params: {
+          api_key: import.meta.env.VITE_TMDB_KEY,
+        },
+      })
+      .then((res) => {
+        if (!!res && !!res.data) setMovieImages(res.data.posters);
       })
       .catch((err) => {
         console.error(err);
@@ -56,7 +79,15 @@ export const MovieProvider = ({ children }) => {
 
   return (
     <MovieContext.Provider
-      value={{ movies, favouriteMovies, addToFavourites, filterMovies }}
+      value={{
+        movies,
+        movieImages,
+        favouriteMovies,
+        getMovie,
+        getMovieImages,
+        addToFavourites,
+        filterMovies,
+      }}
     >
       {children}
     </MovieContext.Provider>

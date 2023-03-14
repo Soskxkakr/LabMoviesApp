@@ -53,4 +53,4 @@ const MovieDetailsPage = (props) => {
   );
 };
 
-export { MoviePage };
+export { MovieDetailsPage };

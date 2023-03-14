@@ -3,9 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import SiteHeader from "./components/siteHeader";
 import { TemplateMoviePage } from "./components/templateMoviePage";
 import { MovieProvider } from "./contexts/MovieContext";
-import { FavouriteMoviesPage } from "./pages/FavouriteMoviesPage/favouriteMoviesPage";
-import { MovieListPage } from "./pages/HomePage/homePage";
-import { MovieReviewPage } from "./pages/movieReviewPage";
+import { FavouriteMoviesPage, MovieListPage, MovieReviewPage } from "./pages";
 
 const App = () => {
   return (
