@@ -15,6 +15,7 @@ import AddMovieReviewPage from './pages/addMovieReviewPage'
 
 
 
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -40,6 +41,7 @@ const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="*" element={<Navigate to="/" />} />
           <Route path="/reviews/:id" element={<MovieReviewPage/>} />
+          <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
         </Routes>
         </MoviesContextProvider>
       </BrowserRouter>
