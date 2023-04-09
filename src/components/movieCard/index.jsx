@@ -14,6 +14,7 @@ import img from '../../images/film-poster-placeholder.png'
 import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import { MoviesContext } from "../../contexts/moviesContext";
+import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 
 
 
@@ -41,6 +42,7 @@ export default function MovieCard({ movie, action }) {
       avatar={
         movie.favourite ? (
           <Avatar sx={styles.avatar}>
+            <PlaylistAddIcon />
             <FavoriteIcon />
           </Avatar>
         ) : null
