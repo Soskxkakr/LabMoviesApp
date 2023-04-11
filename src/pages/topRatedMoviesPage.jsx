@@ -29,3 +29,5 @@ const TopRatedMoviesPage = () => {
 };
 
 export default TopRatedMoviesPage;
+
+//new
