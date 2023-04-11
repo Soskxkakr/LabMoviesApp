@@ -29,5 +29,3 @@ const MostPopularMoviesPage = () => {
 };
 
 export default MostPopularMoviesPage;
-
-//new

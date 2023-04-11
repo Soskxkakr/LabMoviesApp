@@ -13,6 +13,7 @@ import MoviesContextProvider from "./contexts/moviesContext";
 import AddMovieReviewPage from './pages/addMovieReviewPage'
 import MostPopularMoviesPage from "./pages/mostPopularMoviesPage";
 import TopRatedMoviesPage from "./pages/topRatedMoviesPage";
+import TopActorsPage from "./pages/topActorsPage";
 
 
 
@@ -45,6 +46,7 @@ const App = () => {
           <Route path="/reviews/:id" element={<MovieReviewPage/>} />
           <Route path="/movies/popular" element={<MostPopularMoviesPage />} />
           <Route path="/movies/top_rated" element={<TopRatedMoviesPage />} />
+          <Route path="/person/popular" element={<TopActorsPage />} />
         </Routes>
         </MoviesContextProvider>
       </BrowserRouter>
