@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { getPopularActors } from "../api/tmdb-api";
 
 const TopActorsPage = () => {
@@ -10,7 +10,7 @@ const TopActorsPage = () => {
         const response = await getPopularActors();
         setActors(response.results);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
     fetchActors();
@@ -19,21 +19,18 @@ const TopActorsPage = () => {
   return (
     <div>
       <h1>Top Actors</h1>
-      <ul>
+      <div className="actors-container">
         {actors.map((actor) => (
-          <li key={actor.id}>
+          <div key={actor.id} className="actor-box">
+            <img
+              src={`https://image.tmdb.org/t/p/w300${actor.profile_path}`}
+              alt={`${actor.name} profile`}
+            />
             <h2>{actor.name}</h2>
-            {actor.profile_path ? (
-              <img
-                src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`}
-                alt={actor.name}
-              />
-            ) : (
-              <img src={Stub} alt="no image available" />
-            )}
-          </li>
+            <p>{actor.known_for_department}</p>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

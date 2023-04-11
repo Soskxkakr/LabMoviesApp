@@ -38,6 +38,7 @@ const SiteHeader = () => {
     { label: "Most Popular", path: "/movies/popular" },
     { label: "Top Rated", path: "/movies/top_rated" },
     { label: "Top Actors", path: "/person/popular" },
+    { label: "Top TV Shows", path: "/tv/top_rated" },
   ];
 
   const handleMenuSelect = (pageURL) => {
@@ -53,10 +54,10 @@ const SiteHeader = () => {
       <AppBar sx={styles.appbar} position="fixed" elevation={0} color="primary">
         <Toolbar>
           <Typography variant="h4" sx={styles.title}>
-            TMDB Client
+            MOVIESAPP
           </Typography>
           <Typography variant="h6" sx={styles.title}>
-            All you ever wanted to know about Movies!
+            Powered by TMDB API
           </Typography>
           {isMobile ? (
             <>

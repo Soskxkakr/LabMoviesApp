@@ -119,3 +119,13 @@ export const getPopularActors = async () => {
   }
   return response.json();
 };
+
+export const getTopRatedTVShows = async () => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/tv/top_rated?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=1`
+  );
+  if (!response.ok) {
+    throw new Error("Failed to fetch top rated TV shows.");
+  }
+  return response.json();
+};

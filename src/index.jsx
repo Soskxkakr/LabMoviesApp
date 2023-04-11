@@ -14,6 +14,8 @@ import AddMovieReviewPage from './pages/addMovieReviewPage'
 import MostPopularMoviesPage from "./pages/mostPopularMoviesPage";
 import TopRatedMoviesPage from "./pages/topRatedMoviesPage";
 import TopActorsPage from "./pages/topActorsPage";
+import TopRatedTvShowsPage from "./pages/topTVShowsPage";
+import TopRatedTVShowsPage from "./pages/topTVShowsPage";
 
 
 
@@ -47,6 +49,7 @@ const App = () => {
           <Route path="/movies/popular" element={<MostPopularMoviesPage />} />
           <Route path="/movies/top_rated" element={<TopRatedMoviesPage />} />
           <Route path="/person/popular" element={<TopActorsPage />} />
+          <Route path="/tv/top_rated" element={<TopRatedTVShowsPage />} />
         </Routes>
         </MoviesContextProvider>
       </BrowserRouter>
