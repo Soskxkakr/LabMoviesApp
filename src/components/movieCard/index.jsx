@@ -1,22 +1,16 @@
-import React, { useContext  } from "react";
+import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
+import StarRateIcon from "@mui/icons-material/StarRate";
+import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import CardHeader from "@mui/material/CardHeader";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
-import StarRateIcon from "@mui/icons-material/StarRate";
 import Grid from "@mui/material/Grid";
-import img from '../../images/film-poster-placeholder.png'
+import Typography from "@mui/material/Typography";
+import React from "react";
 import { Link } from "react-router-dom";
-import Avatar from "@mui/material/Avatar";
-import { MoviesContext } from "../../contexts/moviesContext";
-import IconButton from "@mui/material/IconButton";
-
-
+import img from "../../images/film-poster-placeholder.png";
+import MovieCardHeader from "./movieCardHeader";
 
 const styles = {
   card: { maxWidth: 345 },
@@ -27,37 +21,15 @@ const styles = {
 };
 
 export default function MovieCard({ movie, action }) {
-  const { favourites, addToFavourites } = useContext(MoviesContext);
-
-  if (favourites.find((id) => id === movie.id)) {
-    movie.favourite = true;
-  } else {
-    movie.favourite = false
-  }
-
-const handleActionClick = () => {
+  const handleActionClick = () => {
     if (typeof action === "function") {
       action(movie);
     }
-};
+  };
 
   return (
     <Card sx={styles.card}>
-          <CardHeader
-      sx={styles.header}
-      avatar={
-        movie.favourite ? (
-          <Avatar sx={styles.avatar}>
-            <FavoriteIcon />
-          </Avatar>
-        ) : null
-      }
-      title={
-        <Typography variant="h5" component="p">
-          {movie.title}{" "}
-        </Typography>
-      }
-    />
+      <MovieCardHeader movie={movie} />
       <CardMedia
         sx={styles.media}
         image={
@@ -83,15 +55,13 @@ const handleActionClick = () => {
         </Grid>
       </CardContent>
       <CardActions disableSpacing>
-      <IconButton onClick={handleActionClick}>
         {action && action(movie)}
-      </IconButton>
-      <Link to={`/movies/${movie.id}`}>
-        <Button variant="outlined" size="medium" color="primary">
-          More Info ...
-        </Button>
-      </Link>
-    </CardActions>
+        <Link to={`/movies/${movie.id}`}>
+          <Button variant="outlined" size="medium" color="primary">
+            More Info ...
+          </Button>
+        </Link>
+      </CardActions>
     </Card>
   );
 }
