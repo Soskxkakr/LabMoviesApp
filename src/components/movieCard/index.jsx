@@ -14,7 +14,7 @@ import img from '../../images/film-poster-placeholder.png'
 import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import { MoviesContext } from "../../contexts/moviesContext";
-import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
+import IconButton from "@mui/material/IconButton";
 
 
 
@@ -35,6 +35,12 @@ export default function MovieCard({ movie, action }) {
     movie.favourite = false
   }
 
+const handleActionClick = () => {
+    if (typeof action === "function") {
+      action(movie);
+    }
+};
+
   return (
     <Card sx={styles.card}>
           <CardHeader
@@ -42,7 +48,6 @@ export default function MovieCard({ movie, action }) {
       avatar={
         movie.favourite ? (
           <Avatar sx={styles.avatar}>
-            <PlaylistAddIcon />
             <FavoriteIcon />
           </Avatar>
         ) : null
@@ -78,13 +83,15 @@ export default function MovieCard({ movie, action }) {
         </Grid>
       </CardContent>
       <CardActions disableSpacing>
-      {action(movie)}
-        <Link to={`/movies/${movie.id}`}>
-          <Button variant="outlined" size="medium" color="primary">
-            More Info ...
-          </Button>
-        </Link>
-      </CardActions>
+      <IconButton onClick={handleActionClick}>
+        {action && action(movie)}
+      </IconButton>
+      <Link to={`/movies/${movie.id}`}>
+        <Button variant="outlined" size="medium" color="primary">
+          More Info ...
+        </Button>
+      </Link>
+    </CardActions>
     </Card>
   );
 }

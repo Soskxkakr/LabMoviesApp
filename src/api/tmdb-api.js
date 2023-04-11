@@ -31,7 +31,7 @@ export const getMovie = (args) => {
 };
 
   
-  export const getGenres = async () => {
+export const getGenres = async () => {
     return fetch(
       "https://api.themoviedb.org/3/genre/movie/list?api_key=" +
         import.meta.env.VITE_TMDB_KEY +
@@ -45,10 +45,10 @@ export const getMovie = (args) => {
     .catch((error) => {
       throw error
    });
-  };
+};
   
   
-  export const getMovieImages = ({ queryKey }) => {
+export const getMovieImages = ({ queryKey }) => {
     const [, idPart] = queryKey;
     const { id } = idPart;
     return fetch(
@@ -63,7 +63,7 @@ export const getMovie = (args) => {
     .catch((error) => {
       throw error
    });
-  };    
+};    
 
   
 export const getMovieReviews = (id) => {
@@ -75,13 +75,11 @@ export const getMovieReviews = (id) => {
         // console.log(json.results);
         return json.results;
       });
-  };
+};
   
-  export const getUpcomingMovies = () => {
+export const getUpcomingMovies = () => {
     return fetch(
-      `https://api.themoviedb.org/3/movie/upcoming?api_key=${
-        import.meta.env.VITE_TMDB_KEY
-      }&language=en-US&include_adult=false&include_video=false&page=1`
+      `https://api.themoviedb.org/3/movie/upcoming?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
     )
       .then((response) => {
         if (!response.ok) {
@@ -92,5 +90,24 @@ export const getMovieReviews = (id) => {
       .catch((error) => {
         throw error;
       });
-  };
-  
+};
+
+export const getPopularMovies = async () => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/popular?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=1`
+  );
+  if (!response.ok) {
+    throw new Error("Failed to fetch popular movies.");
+  }
+  return response.json();
+};
+
+export const getTopRatedMovies = async () => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/top_rated?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=1`
+  );
+  if (!response.ok) {
+    throw new Error("Failed to fetch top rated movies.");
+  }
+  return response.json();
+};
